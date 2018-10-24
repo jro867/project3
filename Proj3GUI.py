@@ -190,8 +190,8 @@ class Proj3GUI( QMainWindow ):
 
 	def generateNetwork(self):
 		nodes = self.newPoints()
-		print('NODES: ')
-		pprint(nodes)
+		# print('NODES: ')
+		# pprint(nodes)
 		OUT_DEGREE = 3
 		size = len(nodes)
 		edgeList = {}
@@ -209,8 +209,8 @@ class Proj3GUI( QMainWindow ):
 									(pt_v.y()-pt_u.y())**2 )
 				edgeList[u].append( (v,100.0*uv_len) )
 			edgeList[u] = sorted(edgeList[u], key=lambda n:n[0])
-		print('EDGE LIST: ')
-		pprint(edgeList)
+		# print('EDGE LIST: ')
+		# pprint(edgeList)
 		self.graph = CS312Graph(nodes, edgeList)
 		self.genParams = (self.randSeed.text(), self.size.text())
 		self.view.clearEdges()
@@ -220,12 +220,10 @@ class Proj3GUI( QMainWindow ):
 
 	def generateClicked(self):
 		if self.graph:
-				print("was self graph")
 				self.generateNetwork()
 				self.view.addPoints( [x.loc for x in self.graph.getNodes()], (0,0,0) )
 				self.view.repaint()
 		else:
-			print("was not")
 			self.generateNetwork()
 			self.view.addPoints( [x.loc for x in self.graph.getNodes()], (0,0,0) )
 			self.view.repaint()
@@ -282,6 +280,7 @@ class Proj3GUI( QMainWindow ):
 			heap_time = self.solver.computeShortestPaths( int(self.sourceNode.text())-1, use_heap=True )
 			heap_path = self.solver.getShortestPath( int(self.targetNode.text())-1 )
 			dist = heap_path['cost']
+
 		self.display_paths( heap_path, heap_time, array_path, array_time )
 		self.checkPathInputs()
 		if dist == float('inf'):

@@ -3,6 +3,9 @@
 
 from CS312Graph import *
 from pprint import pprint
+from ArrayQueue import *
+from Dijkstra import *
+from HeapQueueArray import *
 import time
 import pickle
 
@@ -37,7 +40,11 @@ class NetworkRoutingSolver:
         self.source = srcIndex
         t1 = time.time()
         # pprint(vars(self.network))
-        print("network: ", self.network)
+        # print("use Heap", use_heap)
+        print("source: ", self.source)
+        data_structure_helper = HeapQueueArray if use_heap else ArrayQueue
+        # result = ArrayQueue(self.network)
+        result = Dijkstra(self.network, self.source, data_structure_helper)
         # TODO: RUN DIJKSTRA'S TO DETERMINE SHORTEST PATHS.
         #       ALSO, STORE THE RESULTS FOR THE SUBSEQUENT
         #       CALL TO getShortestPath(dest_index)
